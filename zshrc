@@ -119,13 +119,31 @@ source $ZSH/oh-my-zsh.sh
 alias cat='batcat'
 alias catn='batcat --style=plain'
 alias catnp='batcat --style=plain --paging=never'
- 
+
+# Flameshot
+alias flameshot='flameshot gui'
+
 # ls
 alias ll='lsd -lh --group-dirs=first'
 alias la='lsd -a --group-dirs=first'
 alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
+
+# move 
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
+# Gnome Control Center
+alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center --verbose &>/dev/null &'
+
+# Docker removes
+alias cleanDockerPs='docker rm $(docker ps -a -q) --force'
+alias cleandocekrImages='docker rmi $(docker images -q) --force'
+
+# VPN Connect
+alias vpnjp='sudo openvpn /etc/openvpn/jp-free-173018.protonvpn.udp.ovpn &>/dev/null & disown'
+alias vpnnl='sudo openvpn /etc/openvpn/nl-free-737067.protonvpn.udp.ovpn &>/dev/null & disown'
 
 # Custom Functions
 function mkt (){
@@ -151,6 +169,10 @@ function settarget(){
 
 function cleartarget(){
     echo '' > /home/elgordoponcio/.config/bin/target
+}
+
+function copy(){
+  cat $1 | xclip -sel clip
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
