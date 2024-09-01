@@ -22,7 +22,7 @@ function ctrl_c() {
 trap ctrl_c INT
 
 # Variables de configuración
-USER_HOME="$HOME"
+USER_HOME="/home/elgordoponcio"
 ROOT_HOME="/root"
 
 # Función para instalar paquetes
