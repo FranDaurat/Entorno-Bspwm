@@ -42,17 +42,19 @@ install_packages() {
 # Función para instalar oh-my-zsh y plugins
 install_oh_my_zsh() {
   echo -e "${blueColour}[*] Instalando oh-my-zsh y plugins...${endColour}"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &>/dev/null &
-  sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &>/dev/null &
-  wait
+  (
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &>/dev/null &
+    sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &>/dev/null &
+    wait
 
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${USER_HOME}/.oh-my-zsh/custom/themes/powerlevel10k &>/dev/null
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${USER_HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${USER_HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${USER_HOME}/.oh-my-zsh/custom/themes/powerlevel10k &>/dev/null
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${USER_HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${USER_HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
 
-  sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ROOT_HOME}/.oh-my-zsh/custom/themes/powerlevel10k &>/dev/null
-  sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ROOT_HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
-  sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ROOT_HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
+    sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ROOT_HOME}/.oh-my-zsh/custom/themes/powerlevel10k &>/dev/null
+    sudo git clone https://github.com/zsh-users/zsh-autosuggestions ${ROOT_HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
+    sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ROOT_HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
+  )&>/dev/null
 }
 
 # Función para copiar archivos de configuración
