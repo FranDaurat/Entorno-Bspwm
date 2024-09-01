@@ -32,7 +32,7 @@ install_packages() {
   echo -e "${blueColour}[*] Actualizando e instalando paquetes...${endColour}"
   export DEBIAN_FRONTEND=noninteractive
   sudo apt update -y &>/dev/null
-  sudo apt install -y git curl kitty bat xclip httpx-toolkit subfinder moreutils lsd bspwm sxhkd zsh polybar picom wmname xwallpaper &>/dev/null
+  sudo apt install -y git curl kitty bat xclip httpx-toolkit subfinder moreutils lsd bspwm sxhkd zsh polybar picom wmname xwallpaper golang &>/dev/null
   sudo apt install -y build-essential vim libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev &>/dev/null
   sudo apt install -y libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev &>/dev/null
   sudo apt install -y libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev meson ninja-build uthash-dev &>/dev/null
@@ -239,6 +239,28 @@ fi
 
 }
 
+scripts_tools(){
+  echo -e "${blueColour}[*] Instalando scripts personales y tools...${endColour}"
+  
+  if [ -d "/opt/my_scripts" ]; then
+    cp -r my_scripts/* /opt/my_scripts/ &>/dev/null
+  else
+    sudo mkdir /opt/my_scripts &>/dev/null
+    cp -r my_scripts/* /opt/my_scripts/ &>/dev/null
+  fi
+
+  if [ -d "${USER_HOME}/go" ]; then  
+    if [ -d "${USER_HOME}/go/bin" ]; then
+      cp -r gobin/* ${USER_HOME}/go/bin/ &>/dev/null
+    else
+      mkdir -p ${USER_HOME}/go/bin &>/dev/null
+      cp -r gobin/* ${USER_HOME}/go/bin/ &>/dev/null
+    fi
+  else
+    mkdir -p ${USER_HOME}/go/bin &>/dev/null
+    cp -r gobin/* ${USER_HOME}/go/bin/ &>/dev/null
+  fi
+}
 
 
 # Llamada a funciones
@@ -253,6 +275,7 @@ fzf_install
 picom_install
 grub_install
 rofi_install
+scripts_tools
 wait
 
 echo -e "\n\n${greenColour}[+] ¡Instalación terminada!${endColour}\n"
