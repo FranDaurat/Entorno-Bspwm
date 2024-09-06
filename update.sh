@@ -5,7 +5,6 @@ sudo cp -r /home/elgordoponcio/go/bin/* /home/elgordoponcio/repos/entorno-bspwm/
 sudo cp /home/elgordoponcio/.zshrc zshrc
 
 # Git Push
-rm -rf gobin/nuclei 
 
 git add . 
 git commit -m "Pusheo Automatizado"
