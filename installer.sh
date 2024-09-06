@@ -243,13 +243,6 @@ fi
 
 scripts_tools(){
   echo -e "${blueColour}[*] Instalando scripts personales y tools...${endColour}"
-  
-  if [ -d "/opt/my_scripts" ]; then
-    cp -r my_scripts/* /opt/my_scripts/ &>/dev/null
-  else
-    sudo mkdir /opt/my_scripts &>/dev/null
-    cp -r my_scripts/* /opt/my_scripts/ &>/dev/null
-  fi
 
   if [ -d "${USER_HOME}/go" ]; then  
     if [ -d "${USER_HOME}/go/bin" ]; then
@@ -282,3 +275,4 @@ wait
 
 echo -e "\n\n${greenColour}[+] ¡Instalación terminada!${endColour}\n"
 tput cnorm
+
