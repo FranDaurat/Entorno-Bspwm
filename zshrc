@@ -146,9 +146,10 @@ alias cleandocekrImages='docker rmi $(docker images -q) --force'
 alias vpnjp='sudo openvpn /etc/openvpn/jp-free-173018.protonvpn.udp.ovpn &>/dev/null & disown'
 alias vpnnl='sudo openvpn /etc/openvpn/nl-free-737067.protonvpn.udp.ovpn &>/dev/null & disown'
 alias vpnus='sudo openvpn /etc/openvpn/us-free-492025.protonvpn.udp.ovpn &>/dev/null & disown'
-alias vpnkill='sudo kill -9 $(ps -faux | grep "openvpn" | grep -v grep | awk "{print \$2}")'
+alias vpnk='sudo kill -9 $(ps -faux | grep "openvpn" | grep -v grep | awk "{print \$2}")'
 
 # Custom Functions
+
 function mkt (){
   mkdir -p nmap content exploits
 }
@@ -176,6 +177,12 @@ function cleartarget(){
 
 function copy(){
   cat $1 | xclip -sel clip
+}
+
+function gitpush(){
+  git add .
+  git commit -m $1
+  git push origin main
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
