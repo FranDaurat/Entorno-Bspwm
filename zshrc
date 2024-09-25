@@ -131,9 +131,12 @@ alias l='lsd --group-dirs=first'
 alias lla='lsd -lha --group-dirs=first'
 alias ls='lsd --group-dirs=first'
 
-# move 
+# Move 
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
+
+# File-Gui
+alias fileadmin='nautilus &>/dev/null &'
 
 # Gnome Control Center
 alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center --verbose &>/dev/null &'
@@ -180,9 +183,9 @@ function copy(){
 }
 
 function gitpush(){
-  git add .
-  git commit -m $1
-  git push origin main
+  sudo git add .
+  sudo git commit -m $1
+  sudo git push origin main
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
