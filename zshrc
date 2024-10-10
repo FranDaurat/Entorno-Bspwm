@@ -115,7 +115,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 unalias gau 
-
+unalias gf
 # Bat
 alias cat='batcat'
 alias catn='batcat --style=plain'
@@ -154,7 +154,7 @@ alias vpnk='sudo kill -9 $(ps -faux | grep "openvpn" | grep -v grep | awk "{prin
 # Custom Functions
 
 function mkt (){
-  mkdir -p nmap content exploits
+  mkdir -p recon recon/nmap content 
 }
 
 function extractPorts(){
@@ -238,6 +238,7 @@ export LS_COLORS="rs=0:di=34:ln=36:mh=00:pi=40;33:so=35:do=35:bd=40;33;01:cd=40;
 
 export PATH=/opt/kitty/bin:$HOME/.local/bin:/opt/my_scripts:/opt/tools:$HOME/go/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/sbin/:/opt/nvim/nvim-linux64/bin
 export PATH=$PATH:/opt
+export GF_PATTERNS="$HOME/.gf"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
