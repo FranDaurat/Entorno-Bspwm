@@ -154,7 +154,7 @@ alias vpnk='sudo kill -9 $(ps -faux | grep "openvpn" | grep -v grep | awk "{prin
 # Custom Functions
 
 function mkt (){
-  mkdir -p recon recon/nmap content 
+  mkdir -p recon recon/nmap content exploits credentials  
 }
 
 function extractPorts(){
