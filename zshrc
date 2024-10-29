@@ -145,12 +145,19 @@ alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center -
 alias cleanDockerPs='docker rm $(docker ps -a -q) --force'
 alias cleandocekrImages='docker rmi $(docker images -q) --force'
 
-# VPN 
+# Proton VPN 
 alias vpnjp='sudo openvpn /etc/openvpn/jp-free-173018.protonvpn.udp.ovpn &>/dev/null & disown'
 alias vpnnl='sudo openvpn /etc/openvpn/nl-free-737067.protonvpn.udp.ovpn &>/dev/null & disown'
 alias vpnus='sudo openvpn /etc/openvpn/us-free-492025.protonvpn.udp.ovpn &>/dev/null & disown'
 alias vpnkill='sudo kill -9 $(ps -faux | grep "openvpn" | grep -v grep | awk "{print \$2}")'
 alias vpncheck='ps -faux | grep "openvpn"'
+
+# Mullvad VPN
+alias connect='mullvad connect'
+alias disconnect='mullvad disconnect'
+alias status='mullvad status'
+alias reconnect='mullvad reconnect'
+
 # Custom Functions
 
 function mkt (){
