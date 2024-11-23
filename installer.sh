@@ -18,14 +18,11 @@ function ctrl_c() {
   exit 1
 }
 
-# Ctrl+C
 trap ctrl_c INT
 
-# Variables de configuración
 USER_HOME="/home/elgordoponcio"
 ROOT_HOME="/root"
 
-# Función para instalar paquetes
 install_packages() {
   echo -e "${yellowColour}[!] Comenzando instalación, dale tiempo... ${endColour}"
   sleep 2
@@ -39,7 +36,7 @@ install_packages() {
   # Por ahora saque el rofi y el feh  ya que revienta todo
 }
 
-# Función para instalar oh-my-zsh y plugins
+
 install_oh_my_zsh() {
   echo -e "${blueColour}[*] Instalando oh-my-zsh y plugins...${endColour}"
   (
@@ -57,10 +54,10 @@ install_oh_my_zsh() {
   )&>/dev/null
 }
 
-# Función para copiar archivos de configuración
-copy_config_files() {
+
+function copy_config_files() {
   echo -e "${blueColour}[*] Copiando archivos de configuración...${endColour}"
-  # .config
+  
   if [ -d "${USER_HOME}/.config" ]; then
     rm -rf ${USER_HOME}/.config/* &>/dev/null
     cp -r config_Bspwm/config_user/* ${USER_HOME}/.config/ &>/dev/null
@@ -68,7 +65,7 @@ copy_config_files() {
     mkdir ${USER_HOME}/.config &>/dev/null
     cp -r config_Bspwm/config_user/* ${USER_HOME}/.config/ &>/dev/null
   fi
-  ## Root
+
   if [ -d "${ROOT_HOME}/.config" ]; then
     rm -rf ${ROOT_HOME}/.config/* &>/dev/null
     sudo cp -r config_Bspwm/config_root/* ${ROOT_HOME}/.config/ &>/dev/null
@@ -77,22 +74,19 @@ copy_config_files() {
     sudo cp -r config_Bspwm/config_root/* ${ROOT_HOME}/.config/ &>/dev/null
   fi
 
-  # nvim
   cp -r nvim /opt &>/dev/null
-  # feh
   sudo cp feh /usr/bin &>/dev/null
 
-  # Wallpaper
   if [ -d "${USER_HOME}/Wallpapers" ]; then
     cp fondo.jpg ${USER_HOME}/Wallpapers/pexels-rpnickson-2478248.jpg &>/dev/null
   else
     mkdir ${USER_HOME}/Wallpapers &>/dev/null
     cp fondo.jpg ${USER_HOME}/Wallpapers/pexels-rpnickson-2478248.jpg &>/dev/null
   fi
-
 }
 
-ohmyzsh-powerlevel10k_install() {
+
+function ohmyzsh-powerlevel10k_install() {
   echo -e "${blueColour}[*] Copiando archivos de oh-my-zsh y powerlevel10k...${endColour}"
 
   if [ -d "${USER_HOME}/powerlevel10k" ]; then
@@ -102,7 +96,7 @@ ohmyzsh-powerlevel10k_install() {
     mkdir ${USER_HOME}/powerlevel10k &>/dev/null
     cp -r powerlevel10k/* ${USER_HOME}/powerlevel10k &>/dev/null
   fi
-  ## Root
+ 
   if [ -d "${ROOT_HOME}/powerlevel10k" ]; then
     rm -rf ${ROOT_HOME}/powerlevel10k/* &>/dev/null
     sudo cp -r powerlevel10k_root/* ${ROOT_HOME}/powerlevel10k/ &>/dev/null
@@ -112,12 +106,11 @@ ohmyzsh-powerlevel10k_install() {
   fi
 
   cp -r oh-my-zsh/* ${USER_HOME}/.oh-my-zsh/ &>/dev/null
-  ## Root
   sudo cp -r oh-my-zsh_root/* ${ROOT_HOME}/.oh-my-zsh/ &>/dev/null
-
 }
 
-plugins_install() {
+
+function plugins_install() {
   echo -e "${blueColour}[*] Instalando plugins...${endColour}"
   if [ -d "/usr/share/zsh-sudo " ]; then
     sudo cp sudo.plugin.zsh /usr/share/zsh-sudo/ &>/dev/null
@@ -134,16 +127,17 @@ plugins_install() {
   fi
 }
 
-zsh-p10k_install() {
+
+function zsh-p10k_install() {
   echo -e "${blueColour}[*] Configurando zshrc y p10k...${endColour}"
-  # .zshrc
+
   if [ -f "${USER_HOME}/.zshrc" ]; then
     rm -rf ${USER_HOME}/.zshrc &>/dev/null
     cp zshrc ${USER_HOME}/.zshrc &>/dev/null
   else
     cp zshrc ${USER_HOME}/.zshrc &>/dev/null
   fi
-  ## Root
+
   if [ -f "${ROOT_HOME}/.zshrc" ]; then
     rm -rf ${ROOT_HOME}/.zshrc &>/dev/null
     sudo cp zshrc ${ROOT_HOME}/.zshrc &>/dev/null
@@ -155,24 +149,23 @@ zsh-p10k_install() {
   if [ -f "${ROOT_HOME}/.zshrc" ]; then
     ln -s -f ${USER_HOME}/.zshrc ${ROOT_HOME}/.zshrc &>/dev/null
   fi
-  # .p10k.zsh
+
   if [ -f "${USER_HOME}/.p10k.zsh" ]; then
     rm -rf ${USER_HOME}/.p10k.zsh &>/dev/null
     cp p10k.zsh ${USER_HOME}/.p10k.zsh &>/dev/null
   else
     cp p10k.zsh ${USER_HOME}/.p10k.zsh &>/dev/null
   fi
-  ## Root
+
   if [ -f "${ROOT_HOME}/.p10k.zsh" ]; then
     rm -rf ${ROOT_HOME}/.p10k.zsh &>/dev/null
     sudo cp p10k.zsh_root ${ROOT_HOME}/.p10k.zsh &>/dev/null
   else
     sudo cp p10k.zsh_root ${ROOT_HOME}/.p10k.zsh &>/dev/null
   fi
-
 }
 
-fonts_install() {
+function fonts_install() {
   echo -e "${blueColour}[*] Instalando fuentes...${endColour}"
 
   if [ -d "/usr/local/share/fonts" ]; then
@@ -193,7 +186,8 @@ fonts_install() {
   fi
 }
 
-fzf_install() {
+
+function fzf_install() {
   echo -e "${blueColour}[*] Instalando fzf...${endColour}"
 
   git clone --depth 1 https://github.com/junegunn/fzf.git ${USER_HOME}/.fzf  &>/dev/null
@@ -221,6 +215,7 @@ picom_install() {
   ) &>/dev/null
 }
 
+
 grub_install(){
   echo -e "${blueColour}[*] Cambiando tema del grub...${endColour}"
   sudo cp -r grub/background.png /boot/grub/themes/kali &>/dev/null
@@ -230,18 +225,17 @@ grub_install(){
   sudo update-grub &>/dev/null 
 }
 
+
 rofi_install(){
-
-if [ -f "./rofi_install" ]; then
-  chmod +x ./rofi_install
-  ./rofi_install
-else
-  echo -e "${redColour}[!] El archivo rofi_install no se encontró. Omita esta parte de la instalación.${endColour}"
-fi
-
+  if [ -f "./rofi_install" ]; then
+    chmod +x ./rofi_install
+    ./rofi_install
+  else
+    echo -e "${redColour}[!] El archivo rofi_install no se encontró. Omita esta parte de la instalación.${endColour}"
+  fi
 }
 
-scripts_tools(){
+function scripts_tools(){
   echo -e "${blueColour}[*] Instalando scripts personales y tools...${endColour}"
 
   if [ -d "${USER_HOME}/go" ]; then  
@@ -258,21 +252,24 @@ scripts_tools(){
 }
 
 
-# Llamada a funciones
-install_packages
-install_oh_my_zsh
-copy_config_files
-ohmyzsh-powerlevel10k_install
-plugins_install
-zsh-p10k_install
-fonts_install
-fzf_install
-picom_install
-grub_install
-rofi_install
-scripts_tools
-wait
+function main(){
 
-echo -e "\n\n${greenColour}[+] ¡Instalación terminada!${endColour}\n"
+  install_packages
+  install_oh_my_zsh
+  copy_config_files
+  ohmyzsh-powerlevel10k_install
+  plugins_install
+  zsh-p10k_install
+  fonts_install
+  fzf_install
+  picom_install
+  grub_install
+  rofi_install
+  scripts_tools
+  wait
+
+  echo -e "\n\n${greenColour}[+] ¡Instalación terminada!${endColour}\n"
+}
+
 tput cnorm
 
