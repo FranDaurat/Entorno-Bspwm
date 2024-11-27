@@ -146,9 +146,9 @@ alias cleanDockerPs='docker rm $(docker ps -a -q) --force'
 alias cleandocekrImages='docker rmi $(docker images -q) --force'
 
 # Proton VPN 
-alias vpnjp='sudo openvpn /etc/openvpn/jp-free-173018.protonvpn.udp.ovpn &>/dev/null & disown'
-alias vpnnl='sudo openvpn /etc/openvpn/nl-free-737067.protonvpn.udp.ovpn &>/dev/null & disown'
-alias vpnus='sudo openvpn /etc/openvpn/us-free-492025.protonvpn.udp.ovpn &>/dev/null & disown'
+alias protonjp='sudo openvpn /etc/openvpn/jp-free-173018.protonvpn.udp.ovpn &>/dev/null & disown'
+alias protonnl='sudo openvpn /etc/openvpn/nl-free-737067.protonvpn.udp.ovpn &>/dev/null & disown'
+alias protonus='sudo openvpn /etc/openvpn/us-free-492025.protonvpn.udp.ovpn &>/dev/null & disown'
 alias vpnkill='sudo kill -9 $(ps -faux | grep "openvpn" | grep -v grep | awk "{print \$2}")'
 alias vpncheck='ps -faux | grep "openvpn"'
 
@@ -159,6 +159,9 @@ alias status='mullvad status'
 alias reconnect='mullvad reconnect'
 alias mullchile='mullvad relay set location cl scl; mullvad connect'
 alias mullbrasil='mullvad relay set location br; mullvad connect'
+alias mullusa='mullvad relay set location us; mullvad connect'
+alias mullcol='mullvad relay set location co; mullvad connect'
+alias mullmex='mullvad relay set location mx; mullvad connect'
 
 # Custom Functions
 
